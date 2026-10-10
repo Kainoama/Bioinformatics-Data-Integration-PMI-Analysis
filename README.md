@@ -66,9 +66,12 @@ PCA was used as an exploratory method to summarize variation in interaction prof
 
 Potential extensions include incorporating additional resources such as BRENDA and STITCH to broaden annotation coverage and support analysis of larger, more diverse datasets.
 
+## Data Availability
+
+The original MIDAS experimental data are not included in this repository. External database annotations and supporting files are included only where permitted. The analysis pipeline is provided to document the data integration and analysis workflow.
+
 ## Acknowledgments
 
 This project was completed during my Bioinformatics Research Internship at Huntsman Cancer Institute, University of Utah, with mentorship from Paul Stewart and Kevin Hicks and collaboration with McKenna Wilson.
 
 **Author:** Kainoa Martinez
-
