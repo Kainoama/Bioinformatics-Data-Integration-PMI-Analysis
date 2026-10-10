@@ -1,68 +1,74 @@
-# Bioinformatics Data Integration: Protein–Metabolite Interaction Analysis
+# Protein–Metabolite Interaction Analysis Through Biological Database Integration
 
 ## Overview
 
-During my Bioinformatics Research Internship at Huntsman Cancer Institute, I developed an R-based pipeline to integrate MIDAS experimental data with the Human Metabolome Database (HMDB) and UniProt annotations. The goal was to identify protein–metabolite interactions (PMIs), distinguish previously annotated interactions from those not found in existing database annotations, and explore patterns in the results.
+During my Bioinformatics Research Internship at Huntsman Cancer Institute, I developed the R-based backend pipeline for a project integrating MIDAS experimental data with annotations from the Human Metabolome Database (HMDB) and UniProt.
 
-By combining experimental data with biological databases, this project helped identify potential new protein–metabolite associations and characterize interaction patterns for further investigation.
+MIDAS (Mass Spectrometry Integrated with Equilibrium Dialysis for the Discovery of Allostery Systematically) identifies protein–metabolite binding events. By comparing MIDAS results with existing biological annotations, the pipeline helped distinguish interactions already represented in the databases from those that were not previously annotated, supporting hypothesis generation and follow-up research.
 
-## Key Results
+## Key Findings
 
-* **86 significant protein–metabolite interactions** identified in the final analysis.
-* **80 interactions were previously unannotated** in the databases examined, highlighting candidates for further investigation.
-* Identified notable outliers in PCA of interaction profiles, including Propionyl-CoA and HSPA5.
-* Developed visualizations to examine interaction significance, frequently interacting proteins and metabolites, and variation in interaction profiles.
+* Identified **86 significant protein–metabolite interactions** in the final analysis.
+* **80 of the 86 interactions were not previously annotated** in the databases examined.
+* Used principal component analysis (PCA) to explore variation in protein–metabolite interaction profiles. Propionyl-CoA and HSPA5 appeared as notable outliers in the analyses.
+* Examined significant interactions and their distributions through bar charts, PCA plots, and a volcano plot focused on albumin (ALB).
 
-## Methods
+Interactions that were not found in the databases were treated as potentially novel candidates, not as experimentally confirmed new biological interactions.
 
-### 1. Data Integration and Annotation
+## Workflow
 
-* Combined positive- and negative-mode MIDAS metabolomics data.
-* Matched metabolite identifiers against HMDB records.
-* Compared UniProt protein identifiers with HMDB protein associations to classify interactions as known or not previously annotated in the database.
-* Used R to clean, filter, and organize interaction-level data.
+### 1. Data Preparation and Integration
+
+* Loaded MIDAS statistics and negative-mode metabolomics metadata.
+* Matched negative-mode metabolite identifiers against HMDB records.
+* Retrieved HMDB protein-association annotations for matched metabolites.
+* Compared protein identifiers in the MIDAS results with associated UniProt identifiers to classify interactions as previously annotated or not found in the examined annotations.
 
 ### 2. Statistical Filtering
 
-Applied significance thresholds to identify interactions for further analysis:
+Filtered interactions for downstream analysis using:
 
-* Log2 fold change > 1
-* q-value < 0.01
+* **Log2 fold change > 1**
+* **q-value < 0.01**
 
-### 3. Exploratory Data Analysis and Visualization
+These thresholds were used to identify significant interactions for the main known-versus-unannotated comparison and related visualizations.
 
-* **Interaction classification:** Compared previously annotated and unannotated interactions.
+### 3. Exploratory Analysis and Visualization
+
+* **Interaction counts:** Compared previously annotated and unannotated interactions.
 * **Frequency analysis:** Identified proteins and metabolites with the highest numbers of significant interactions.
-* **Principal component analysis (PCA):** Constructed protein-by-metabolite and metabolite-by-protein matrices using composite interaction scores to explore variation in interaction profiles.
-* **Volcano plots:** Visualized fold changes and statistical significance for metabolite interactions with a selected protein.
+* **PCA:** Built protein-by-metabolite and metabolite-by-protein matrices from composite interaction scores to explore differences in interaction profiles.
+* **Volcano plot:** Visualized metabolite interactions with albumin using log2 fold change and statistical significance.
 
-The composite interaction score was calculated as:
+The composite score used in the PCA was calculated as:
 
 `log2 fold change × −log10(p-value)`
 
-## Technologies
+PCA was used as an exploratory method to summarize variation in interaction profiles. Clustering and outliers were treated as candidates for further investigation rather than proof of biological function.
 
-* **Programming:** R
-* **Data manipulation:** dplyr, tidyverse, stringr
-* **Visualization:** ggplot2, ggrepel
+## My Contributions
+
+* Developed the R-based backend pipeline for integrating MIDAS data with HMDB and UniProt annotations.
+* Implemented metabolite matching, interaction classification, statistical filtering, and downstream analysis.
+* Created visualizations to summarize interaction status, interaction frequency, PCA results, and statistical significance.
+* Collaborated on a project that also included an interactive Shiny application. The front-end interface was developed by my co-intern; my contribution focused on the backend analysis pipeline.
+
+## Tools and Technologies
+
+* **Language:** R
+* **Data wrangling:** `dplyr`, `tidyverse`, `stringr`
+* **Visualization:** `ggplot2`, `ggrepel`
 * **Dimensionality reduction:** Principal component analysis (PCA)
 * **Biological databases:** UniProt, HMDB
-* **Data processing:** Statistical filtering, identifier matching, data transformation, and missing-value handling
-
-## Significance and Limitations
-
-Integrating MIDAS experimental results with existing biological annotations provides a way to investigate protein–metabolite interactions at scale. The large proportion of interactions not found in the databases examined highlights potential gaps in existing annotations.
-
-However, an interaction classified as previously unannotated is not necessarily a confirmed novel biological interaction. Experimental validation and further database comparisons would be needed to establish its biological significance.
-
-PCA provided an exploratory view of interaction-profile variation, while the identified outliers offer potential directions for further investigation.
+* **Methods:** Data integration, identifier matching, statistical filtering, exploratory data analysis
 
 ## Future Directions
 
-Potential extensions include incorporating additional biological resources, such as BRENDA and STITCH, to expand annotation coverage and investigate a broader range of protein–metabolite associations.
+Potential extensions include incorporating additional resources such as BRENDA and STITCH to broaden annotation coverage and support analysis of larger, more diverse datasets.
 
 ## Acknowledgments
 
-This work was completed during my Bioinformatics Research Internship at Huntsman Cancer Institute, University of Utah, with guidance and support from the research team.
+This project was completed during my Bioinformatics Research Internship at Huntsman Cancer Institute, University of Utah, with mentorship from Paul Stewart and Kevin Hicks and collaboration with McKenna Wilson.
 
-**Project author:** Kainoa Martinez
+**Author:** Kainoa Martinez
+
