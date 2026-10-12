@@ -1,4 +1,4 @@
-# Protein–Metabolite Interaction Analysis Through Biological Database Integration
+# Linking MIDAS Data with Biological Databases:  An R-Based Pipeline for Protein-Metabolite Discovery
 
 ## Overview
 
